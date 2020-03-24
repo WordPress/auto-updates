@@ -38,10 +38,10 @@ function wp_autoupdates_enqueues( $hook ) {
 
 			$update_message = wp_autoupdates_get_update_message();
 			foreach ( $wp_auto_update_plugins as $plugin ) {
-				$autoupdate_text = ' <span class="plugin-autoupdate-enabled"><span class="dashicons dashicons-update" aria-hidden="true"></span> ';
+				$autoupdate_text  = ' <span class="plugin-autoupdate-enabled"><span class="dashicons dashicons-update" aria-hidden="true"></span> ';
 				$autoupdate_text .= $update_message;
 				$autoupdate_text .= '</span> ';
-				$script .= 'jQuery(".check-column input[value=\'' . $plugin . '\']").closest("tr").find(".plugin-title > p").append(\'' . $autoupdate_text . '\');';
+				$script          .= 'jQuery(".check-column input[value=\'' . $plugin . '\']").closest("tr").find(".plugin-title > p").append(\'' . $autoupdate_text . '\');';
 			}
 		}
 		$script .= '});';
@@ -85,7 +85,7 @@ function wp_autoupdates_is_plugins_auto_update_enabled() {
  */
 function wp_autoupdates_is_themes_auto_update_enabled() {
 	$enabled = ! defined( 'WP_DISABLE_THEMES_AUTO_UPDATE' ) || ! WP_DISABLE_THEMES_AUTO_UPDATE;
-	
+
 	/**
 	 * Filters whether themes manual auto-update is enabled.
 	 *
@@ -147,10 +147,10 @@ function wp_autoupdates_add_plugins_autoupdates_column_content( $column_name, $p
 	if ( 'autoupdates_column' !== $column_name ) {
 		return;
 	}
-	$plugins = get_plugins();
+	$plugins         = get_plugins();
 	$plugins_updates = get_site_transient( 'update_plugins' );
-	$page = isset( $_GET['paged'] ) && ! empty( $_GET['paged'] ) ? wp_unslash( esc_html( $_GET['paged'] ) ) : '';
-	$plugin_status = isset( $_GET['plugin_status'] ) && ! empty( $_GET['plugin_status'] ) ? wp_unslash( esc_html( $_GET['plugin_status'] ) ) : '';
+	$page            = isset( $_GET['paged'] ) && ! empty( $_GET['paged'] ) ? wp_unslash( esc_html( $_GET['paged'] ) ) : '';
+	$plugin_status   = isset( $_GET['plugin_status'] ) && ! empty( $_GET['plugin_status'] ) ? wp_unslash( esc_html( $_GET['plugin_status'] ) ) : '';
 	if ( wp_autoupdates_is_plugins_auto_update_enabled() ) {
 		if ( ! isset( $plugins[ $plugin_file ] ) ) {
 			return;
@@ -169,7 +169,7 @@ function wp_autoupdates_add_plugins_autoupdates_column_content( $column_name, $p
 			echo '<br />';
 
 			$update_message = wp_autoupdates_get_update_message();
-			if ( isset( $plugins_updates->response[$plugin_file] ) ) {
+			if ( isset( $plugins_updates->response[ $plugin_file ] ) ) {
 				echo '<span class="plugin-autoupdate-time">';
 				echo $update_message;
 				echo '<br />';
@@ -205,16 +205,16 @@ function wp_autoupdates_add_plugins_autoupdates_column_content( $column_name, $p
 		}
 	}
 }
-add_action( 'manage_plugins_custom_column' , 'wp_autoupdates_add_plugins_autoupdates_column_content', 10, 3 );
+add_action( 'manage_plugins_custom_column', 'wp_autoupdates_add_plugins_autoupdates_column_content', 10, 3 );
 
 
 /**
  * Add plugins autoupdates bulk actions
  */
 function wp_autoupdates_plugins_bulk_actions( $actions ) {
-    $actions['enable-autoupdate-selected']  = __( 'Enable auto-updates', 'wp-autoupdates' );
-    $actions['disable-autoupdate-selected'] = __( 'Disable auto-updates', 'wp-autoupdates' );
-    return $actions;
+	$actions['enable-autoupdate-selected']  = __( 'Enable auto-updates', 'wp-autoupdates' );
+	$actions['disable-autoupdate-selected'] = __( 'Disable auto-updates', 'wp-autoupdates' );
+	return $actions;
 }
 add_action( 'bulk_actions-plugins', 'wp_autoupdates_plugins_bulk_actions' );
 add_action( 'bulk_actions-plugins-network', 'wp_autoupdates_plugins_bulk_actions' );
@@ -253,7 +253,7 @@ function wp_autoupdates_enabler() {
 
 		if ( in_array( $plugin, $wp_auto_update_plugins, true ) ) {
 			$wp_auto_update_plugins = array_diff( $wp_auto_update_plugins, array( $plugin ) );
-			$action_type = 'disable-autoupdate=true';
+			$action_type            = 'disable-autoupdate=true';
 		} else {
 			array_push( $wp_auto_update_plugins, $plugin );
 			$action_type = 'enable-autoupdate=true';
@@ -411,7 +411,7 @@ function wp_autoupdates_plugins_status_links( $status_links ) {
 		if ( 0 === $count ) {
 			continue;
 		}
-		switch( $type ) {
+		switch ( $type ) {
 			case 'autoupdate_enabled':
 				/* translators: %s: Number of plugins. */
 				$text = _n(
@@ -476,7 +476,7 @@ function wp_autoupdates_plugins_filter_plugins_by_status( $plugins ) {
 	}
 
 	$wp_auto_update_plugins = get_site_option( 'wp_auto_update_plugins', array() );
-	$_plugins = array();
+	$_plugins               = array();
 	foreach ( $plugins as $plugin_file => $plugin_data ) {
 		switch ( $_REQUEST['plugin_status'] ) {
 			case 'autoupdate_enabled':
@@ -539,19 +539,19 @@ function wp_autoupdates_debug_information( $info ) {
 
 			if ( ! empty( $plugin_version ) && ! empty( $plugin_author ) ) {
 				/* translators: 1: Plugin version number. 2: Plugin author name. */
-				$plugin_version_string       = sprintf( __( 'Version %1$s by %2$s', 'wp-autoupdates' ), $plugin_version, $plugin_author );
+				$plugin_version_string = sprintf( __( 'Version %1$s by %2$s', 'wp-autoupdates' ), $plugin_version, $plugin_author );
 				/* translators: 1: Plugin version number. 2: Plugin author name. */
 				$plugin_version_string_debug = sprintf( __( 'version: %1$s, author: %2$s', 'wp-autoupdates' ), $plugin_version, $plugin_author );
 			} else {
 				if ( ! empty( $plugin_author ) ) {
 					/* translators: %s: Plugin author name. */
-					$plugin_version_string       = sprintf( __( 'By %s', 'wp-autoupdates' ), $plugin_author );
+					$plugin_version_string = sprintf( __( 'By %s', 'wp-autoupdates' ), $plugin_author );
 					/* translators: %s: Plugin author name. */
 					$plugin_version_string_debug = sprintf( __( 'author: %s, version: (undefined)', 'wp-autoupdates' ), $plugin_author );
 				}
 				if ( ! empty( $plugin_version ) ) {
 					/* translators: %s: Plugin version number. */
-					$plugin_version_string       = sprintf( __( 'Version %s', 'wp-autoupdates' ), $plugin_version );
+					$plugin_version_string = sprintf( __( 'Version %s', 'wp-autoupdates' ), $plugin_version );
 					/* translators: %s: Plugin version number. */
 					$plugin_version_string_debug = sprintf( __( 'author: (undefined), version: %s', 'wp-autoupdates' ), $plugin_version );
 				}
@@ -559,7 +559,7 @@ function wp_autoupdates_debug_information( $info ) {
 
 			if ( array_key_exists( $plugin_path, $plugin_updates ) ) {
 				/* translators: %s: Latest plugin version number. */
-				$plugin_version_string       .= ' ' . sprintf( __( '(Latest version: %s)', 'wp-autoupdates' ), $plugin_updates[ $plugin_path ]->update->new_version );
+				$plugin_version_string .= ' ' . sprintf( __( '(Latest version: %s)', 'wp-autoupdates' ), $plugin_updates[ $plugin_path ]->update->new_version );
 				/* translators: %s: Latest plugin version number. */
 				$plugin_version_string_debug .= ' ' . sprintf( __( '(latest version: %s)', 'wp-autoupdates' ), $plugin_updates[ $plugin_path ]->update->new_version );
 			}
@@ -598,7 +598,7 @@ add_filter( 'debug_information', 'wp_autoupdates_debug_information' );
  */
 function wp_autoupdates_automatic_updates_complete_notification( $results ) {
 	$successful_updates = array();
-	$failed_updates = array();
+	$failed_updates     = array();
 	if ( isset( $results['plugin'] ) ) {
 		foreach ( $results['plugin'] as $update_result ) {
 			if ( true === $update_result->result ) {
@@ -655,7 +655,7 @@ function wp_autoupdates_send_email_notification( $type, $successful_updates, $fa
 		case 'mixed':
 			/* translators: %s: Site title. */
 			$subject = __( '[%s] Some plugins have automatically updated', 'wp-autoupdates' );
-			$body[] = sprintf(
+			$body[]  = sprintf(
 				/* translators: %s: Home URL. */
 				__( 'Howdy! There were some failures while attempting to update plugins on your site at %s.', 'wp-autoupdates' ),
 				home_url()
@@ -740,7 +740,7 @@ function wp_autoupdates_get_update_message() {
 	$time_to_next_update = human_time_diff( intval( $next_update_time ) );
 
 	// See if cron is overdue.
-	$overdue = (time() - $next_update_time) > 0;
+	$overdue = ( time() - $next_update_time ) > 0;
 	if ( $overdue ) {
 		return sprintf(
 			/* translators: Duration that WP-Cron has been overdue. */
