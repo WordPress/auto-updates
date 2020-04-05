@@ -374,6 +374,16 @@ function wp_autoupdates_themes_enabler() {
 			$action_type = 'enable-autoupdate=true';
 		}
 
+		/**
+		 * Allow others to hook into saving action.
+		 *
+		 * Allow third-party plugin/theme data retrieval.
+		 *
+		 * @since 0.4.0
+		 *
+		 * @param array $wp_auto_update_themes List of auto-updated themes.
+		 */
+		do_action( 'wp_auto_update_themes_save_pre', $wp_auto_update_themes );
 		update_site_option( 'wp_auto_update_themes', $wp_auto_update_themes );
 		$theme_status = '';
 		if ( is_multisite() && is_network_admin() ) {
@@ -436,6 +446,16 @@ function wp_autoupdates_plugins_bulk_actions_handle( $redirect_to, $doaction, $i
 		$new_autoupdated_plugins = array_merge( $previous_autoupdated_plugins, $plugins );
 		$new_autoupdated_plugins = array_unique( $new_autoupdated_plugins );
 
+		/**
+		 * Allow others to hook into saving action.
+		 *
+		 * Allow third-party plugin/theme data retrieval.
+		 *
+		 * @since 0.4.0
+		 *
+		 * @param array $new_autoupdated_plugins List of auto-updated themes.
+		 */
+		do_action( 'wp_auto_update_plugins_save_pre', $new_autoupdated_plugins );
 		update_site_option( 'wp_auto_update_plugins', $new_autoupdated_plugins );
 
 		$redirect_to = self_admin_url( "plugins.php?enable-autoupdate=true&plugin_status=$status&paged=$page&s=$s" );
@@ -468,6 +488,16 @@ function wp_autoupdates_plugins_bulk_actions_handle( $redirect_to, $doaction, $i
 		$new_autoupdated_plugins = array_diff( $previous_autoupdated_plugins, $plugins );
 		$new_autoupdated_plugins = array_unique( $new_autoupdated_plugins );
 
+		/**
+		 * Allow others to hook into saving action.
+		 *
+		 * Allow third-party plugin/theme data retrieval.
+		 *
+		 * @since 0.4.0
+		 *
+		 * @param array $new_autoupdated_plugins List of auto-updated plugins.
+		 */
+		do_action( 'wp_auto_update_plugins_save_pre', $new_autoupdated_plugins );
 		update_site_option( 'wp_auto_update_plugins', $new_autoupdated_plugins );
 
 		$redirect_to = self_admin_url( "plugins.php?disable-autoupdate=true&plugin_status=$status&paged=$page&s=$s" );
@@ -492,6 +522,16 @@ function wp_autoupdates_plugin_deleted( $plugin_file, $deleted ) {
 	$wp_auto_update_plugins = get_site_option( 'wp_auto_update_plugins', array() );
 	if ( in_array( $plugin_file, $wp_auto_update_plugins, true ) ) {
 		$wp_auto_update_plugins = array_diff( $wp_auto_update_plugins, array( $plugin_file ) );
+		/**
+		 * Allow others to hook into saving action.
+		 *
+		 * Allow third-party plugin/theme data retrieval.
+		 *
+		 * @since 0.4.0
+		 *
+		 * @param array $wp_auto_update_plugins List of auto-updated plugins.
+		 */
+		do_action( 'wp_auto_update_plugins_save_pre', $wp_auto_update_plugins );
 		update_site_option( 'wp_auto_update_plugins', $wp_auto_update_plugins );
 	}
 }
@@ -1188,6 +1228,16 @@ function wp_autoupdates_themes_bulk_actions_handle( $redirect_to, $doaction, $it
 		$new_autoupdated_themes = array_merge( $previous_autoupdated_themes, $themes );
 		$new_autoupdated_themes = array_unique( $new_autoupdated_themes );
 
+		/**
+		 * Allow others to hook into saving action.
+		 *
+		 * Allow third-party plugin/theme data retrieval.
+		 *
+		 * @since 0.4.0
+		 *
+		 * @param array $new_autoupdated_themes List of auto-updated themes.
+		 */
+		do_action( 'wp_auto_update_themes_save_pre', $new_autoupdated_themes );
 		update_site_option( 'wp_auto_update_themes', $new_autoupdated_themes );
 
 		if ( 'themes.php' === $pagenow ) {
@@ -1231,6 +1281,16 @@ function wp_autoupdates_themes_bulk_actions_handle( $redirect_to, $doaction, $it
 		$new_autoupdated_themes = array_diff( $previous_autoupdated_themes, $themes );
 		$new_autoupdated_themes = array_unique( $new_autoupdated_themes );
 
+		/**
+		 * Allow others to hook into saving action.
+		 *
+		 * Allow third-party plugin/theme data retrieval.
+		 *
+		 * @since 0.4.0
+		 *
+		 * @param array $new_autoupdated_themes List of auto-updated themes.
+		 */
+		do_action( 'wp_auto_update_themes_save_pre', $new_autoupdated_themes );
 		update_site_option( 'wp_auto_update_themes', $new_autoupdated_themes );
 
 		if ( 'themes.php' === $pagenow ) {
