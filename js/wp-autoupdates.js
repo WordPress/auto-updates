@@ -9,7 +9,7 @@ jQuery(function ($) {
 
 		// Show loading status.
 		$anchor.html( '<span class="dashicons dashicons-update spin"></span> ' + wp_autoupdates.disabling );
-
+		wp.a11y.speak( wp_autoupdates.disabling, 'polite' );
 		$.post(
 			ajaxurl,
 			{
@@ -23,6 +23,7 @@ jQuery(function ($) {
 			}
 		)
 		.done(function (response) {
+			wp.a11y.speak( wp_autoupdates.auto_disabled, 'polite' );
 			$( '.autoupdate_enabled span' ).html( response.data.enabled_count );
 			$( '.autoupdate_disabled span' ).html( response.data.disabled_count );
 			$parent.html( response.data.return_html );
@@ -45,7 +46,7 @@ jQuery(function ($) {
 
 		// Show loading status.
 		$anchor.addClass( 'spin' ).find( '.plugin-autoupdate-label' ).html( '<span class="dashicons dashicons-update spin"></span> ' + wp_autoupdates.enabling );
-
+		wp.a11y.speak( wp_autoupdates.enabling, 'polite' );
 		$.post(
 			ajaxurl,
 			{
@@ -59,6 +60,7 @@ jQuery(function ($) {
 			}
 		)
 		.done(function (response) {
+			wp.a11y.speak( wp_autoupdates.auto_enabled, 'polite' );
 			$( '.autoupdate_enabled span' ).html( response.data.enabled_count );
 			$( '.autoupdate_disabled span' ).html( response.data.disabled_count );
 			$parent.html( response.data.return_html );
@@ -81,7 +83,7 @@ jQuery(function ($) {
 
 		// Show loading status.
 		$anchor.html( '<span class="dashicons dashicons-update spin"></span> ' + wp_autoupdates.disabling );
-
+		wp.a11y.speak( wp_autoupdates.disabling, 'polite' );
 		$.post(
 			ajaxurl,
 			{
@@ -95,6 +97,7 @@ jQuery(function ($) {
 			}
 		)
 		.done(function (response) {
+			wp.a11y.speak( wp_autoupdates.auto_disabled, 'polite' );
 			$( '.autoupdate_enabled span' ).html( response.data.enabled_count );
 			$( '.autoupdate_disabled span' ).html( response.data.disabled_count );
 			$parent.html( response.data.return_html );
@@ -117,7 +120,7 @@ jQuery(function ($) {
 
 		// Show loading status.
 		$anchor.addClass( 'spin' ).find( '.theme-autoupdate-label' ).html( '<span class="dashicons dashicons-update spin"></span> ' + wp_autoupdates.enabling );
-
+		wp.a11y.speak( wp_autoupdates.enabling, 'polite' );
 		$.post(
 			ajaxurl,
 			{
@@ -131,6 +134,7 @@ jQuery(function ($) {
 			}
 		)
 		.done(function (response) {
+			wp.a11y.speak( wp_autoupdates.auto_enabled, 'polite' );
 			$( '.autoupdate_enabled span' ).html( response.data.enabled_count );
 			$( '.autoupdate_disabled span' ).html( response.data.disabled_count );
 			$parent.html( response.data.return_html );
@@ -153,7 +157,7 @@ jQuery(function ($) {
 
 		// Show loading status.
 		$anchor.html( '<span class="dashicons dashicons-update spin"></span> ' + wp_autoupdates.disabling );
-
+		wp.a11y.speak( wp_autoupdates.disabling, 'polite' );
 		$.post(
 			ajaxurl,
 			{
@@ -167,6 +171,7 @@ jQuery(function ($) {
 			}
 		)
 		.done(function (response) {
+			wp.a11y.speak( wp_autoupdates.auto_disabled, 'polite' );
 			$parent.html( response.data.return_html );
 			$parent.find('.theme-autoupdate-enable').focus();
 		})
@@ -187,7 +192,7 @@ jQuery(function ($) {
 
 		// Show loading status.
 		$parent.find( '.theme-autoupdate-label' ).html( '<span class="dashicons dashicons-update spin"></span> ' + wp_autoupdates.enabling );
-
+		wp.a11y.speak( wp_autoupdates.enabling, 'polite' );
 		$.post(
 			ajaxurl,
 			{
@@ -201,6 +206,7 @@ jQuery(function ($) {
 			}
 		)
 		.done(function (response) {
+			wp.a11y.speak( wp_autoupdates.auto_enabled, 'polite' );
 			$parent.html( response.data.return_html );
 			$parent.find('.theme-autoupdate-disable').focus();
 		})
