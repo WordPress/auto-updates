@@ -26,6 +26,6 @@ define( 'WP_AUTO_UPDATES_VERSION', '0.6.0' );
 /**
  * Load only when needed.
  */
-if ( ! function_exists( 'wp_is_plugins_auto_update_enabled' ) ) {
+if ( ! function_exists( 'wp_autoupdates_is_plugins_auto_update_enabled' ) ) {
 	include_once plugin_dir_path( __FILE__ ) . 'functions.php';
 }
